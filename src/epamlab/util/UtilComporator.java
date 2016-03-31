@@ -6,14 +6,17 @@ import epamlab.util.anatation.TypeCompare;
 
 public class UtilComporator {
 	public static boolean compare(Object object1, Object object2) {
+		if(object1.getClass()!=object2.getClass()){
+			throw new IllegalArgumentException("Arguments is  equal class");
+		}
 		boolean isEquals = true;
 		Class class_1 = object1.getClass();
 		Field[] fields_1 = class_1.getDeclaredFields();
 		for (Field field : fields_1) {
-			Equal equal = field.getAnnotation(Equal.class);
-			if (equal != null) {
+			Equal equalAnatetion = field.getAnnotation(Equal.class);
+			if (equalAnatetion != null) {
 				field.setAccessible(true);
-				TypeCompare type = equal.getTypeCompare();
+				TypeCompare typeCompare = equalAnatetion.getTypeCompare();
 				Object o1 = null;
 				Object o2 = null;
 				try {
@@ -22,10 +25,11 @@ public class UtilComporator {
 					o2 = field.get(object2);
 					System.out.println(o2.toString());
 				} catch (IllegalArgumentException | IllegalAccessException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					IllegalArgumentException ex = new IllegalArgumentException("Problem with access varible");
+					ex.initCause(e);
+					throw ex;
 				}
-				if (type == TypeCompare.VALUE) {
+				if (typeCompare == TypeCompare.VALUE) {
 					if (o1 != null) {
 						if (!o1.equals(o2)) {
 							isEquals = false;
@@ -40,7 +44,6 @@ public class UtilComporator {
 
 				}
 			}
-
 		}
 		return isEquals;
 	}
