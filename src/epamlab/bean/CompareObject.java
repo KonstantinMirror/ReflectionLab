@@ -11,10 +11,10 @@ public class CompareObject {
 	@Equal(getTypeCompare = TypeCompare.REFERENCE)
 	private String string_2;
 	
-	@Equal(getTypeCompare = TypeCompare.REFERENCE)
+	@Equal(getTypeCompare = TypeCompare.VALUE)
 	private Integer firstNumber;
 	
-	@Equal(getTypeCompare = TypeCompare.VALUE)
+	@Equal(getTypeCompare = TypeCompare.REFERENCE)
 	private int intVar;
 	
 
