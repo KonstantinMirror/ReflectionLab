@@ -6,10 +6,9 @@ import epamlab.util.anatation.TypeCompare;
 
 public class UtilComporator {
 	public static boolean compare(Object object1, Object object2) {
-		if(object1.getClass()!=object2.getClass()){
-			throw new IllegalArgumentException("Arguments is  equal class");
+		if (object1.getClass() != object2.getClass()) {
+			throw new IllegalArgumentException("Arguments is not equal class");
 		}
-		boolean isEquals = true;
 		Class class_1 = object1.getClass();
 		Field[] fields_1 = class_1.getDeclaredFields();
 		for (Field field : fields_1) {
@@ -21,31 +20,42 @@ public class UtilComporator {
 				Object o2 = null;
 				try {
 					o1 = field.get(object1);
-					System.out.println(o1.toString());
+					System.out.println(o1);
 					o2 = field.get(object2);
-					System.out.println(o2.toString());
+					System.out.println(o2);
 				} catch (IllegalArgumentException | IllegalAccessException e) {
 					IllegalArgumentException ex = new IllegalArgumentException("Problem with access varible");
 					ex.initCause(e);
 					throw ex;
 				}
-				if (typeCompare == TypeCompare.VALUE) {
-					if (o1 != null) {
-						if (!o1.equals(o2)) {
-							isEquals = false;
-							break;
-						}
+				if (typeCompare == TypeCompare.REFERENCE) {
+					if (!compareWithRefernce(o1, o2)) {
+						return false;
 					}
 				} else {
-					if (o1 != o2) {
-						isEquals = false;
-						break;
+					if (!compareWithValue(o1, o2)) {
+						return false;
 					}
-
 				}
 			}
 		}
-		return isEquals;
+		return true;
+	}
+
+	private static boolean compareWithRefernce(Object object1, Object object2) {
+		boolean result = false;
+		if (object1 == object2) {
+			result = true;
+		}
+		return result;
+	}
+
+	private static boolean compareWithValue(Object object1, Object object2) {
+		if (object1 != null) {
+			return object1.equals(object2);
+		} else {
+			return false;
+		}
 	}
 
 }

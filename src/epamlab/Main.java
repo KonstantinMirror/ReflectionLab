@@ -7,11 +7,14 @@ public class Main {
 
 	public static void main(String[] args) {
 		CompareObject obj1 = new CompareObject();
-		obj1.setObject1("123");
-		obj1.setObject2("5");
+		obj1.setString_1("hello");
+		obj1.setString_2("world");
+		obj1.setFirstNumber(10);
 		CompareObject obj2 = new CompareObject();
-		obj2.setObject1("123");
-		obj2.setObject2("0");
+		
+		obj2.setString_1("hello");
+		obj2.setString_2("world");
+		obj2.setFirstNumber(5);
 		System.out.println(UtilComporator.compare(obj1, obj2));
 	}
 
