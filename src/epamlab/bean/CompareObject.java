@@ -13,6 +13,18 @@ public class CompareObject {
 	
 	@Equal(getTypeCompare = TypeCompare.REFERENCE)
 	private Integer firstNumber;
+	
+	@Equal(getTypeCompare = TypeCompare.VALUE)
+	private int intVar;
+	
+
+	public int getIntVar() {
+		return intVar;
+	}
+
+	public void setIntVar(int intVar) {
+		this.intVar = intVar;
+	}
 
 	public String getString_1() {
 		return string_1;

@@ -51,10 +51,12 @@ public class UtilComporator {
 	}
 
 	private static boolean compareWithValue(Object object1, Object object2) {
-		if (object1 != null) {
-			return object1.equals(object2);
-		} else {
+		if (object1 == null & object2 == null) {
+			return true;
+		} else if (object1 == null) {
 			return false;
+		} else {
+			return object1.equals(object2);
 		}
 	}
 
