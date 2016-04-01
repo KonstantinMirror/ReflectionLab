@@ -2,7 +2,6 @@ package epamlab.util;
 
 import java.lang.reflect.Field;
 
-import epamlab.bean.CompareObject;
 import epamlab.util.anatation.Equal;
 import epamlab.util.anatation.TypeCompare;
 
